@@ -1,0 +1,32 @@
+<div style="width: 1000px; margin: auto;">
+    <h1 style="text-align: center;" class="mt-2">Users List</h1>
+    <!-- <button class="float-right" mat-raised-button color="warn" style="margin: 10px auto;" type="button" [routerLink]="['/dashbord/AddContact']">
+      <i class="fas fa-plus"></i> Add Contact</button> -->
+      <!-- <input type="products" class="form-control rounded" placeholder="Search User by first or last Name" [(ngModel)]="Searchtext"  aria-label="Search" aria-describedby="search-addon" > -->
+      <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="on" placeholder="Start searching for User">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">First Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">E-mail</th>
+          <th scope="col">Liste</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let user of Users | filter : searchText" >
+        <tr >
+          <td>{{user.firstname}}</td>
+          <td>{{user.lastname}}</td>
+          <td>{{user.email}}</td>
+          <td>{{user.liste}}</td>
+          <td>
+            <button class="btn btn-danger" (click)="deleteUser(user._id)" [disabled]="user.liste === 'admin'">
+              <i class="fas fa-trash-alt"></i>  Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  

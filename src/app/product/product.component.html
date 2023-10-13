@@ -1,0 +1,263 @@
+<div class="container">
+<div class="card w-60 mx-auto mt-5 p-4">
+<form [formGroup]="myForm" (ngSubmit)="sendData()">
+    <div class="row">
+        <div class="col-4">
+            <input  formControlName="reference" type="text" class="form-control" placeholder="Reference" required >
+            
+        </div>
+        <div class="col-4">
+          <input   formControlName="nom" type="text" class="form-control" placeholder="nom" required>
+      </div>
+        <div class="col-4">
+            <input   formControlName="marque" type="text" class="form-control" placeholder="marque" >
+        </div>
+      
+        <div class="col-4">
+            <input formControlName="quantite" type="number" min=0 class="form-control" placeholder="quantite" > 
+        </div>
+        <div class="col-4">
+            <input   formControlName="price" type="number" min=0 class="form-control" placeholder="price" >
+        </div>
+       
+        <div class="col-4">
+            <input   formControlName="image"  type="file" (change)="onFileSelected($event)" class="form-control m-1"  placeholder="image" >
+
+        </div>
+
+
+
+        <div class="col-2">
+            <button class="btn btn-outline-warning">add</button>
+        </div>
+    </div>
+  </form>
+</div>
+
+
+<div class="card w-60 mx-auto mt-5 p-4">
+
+   <table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Reference</th>
+            <th>Nom</th>
+            <th>Marque</th>
+            <th>Quantite</th>
+            <th>Price</th>
+            <th>Marque_voiture</th>
+            <th>Status</th>
+            <th>Image</th>
+            <th>Options</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of products; let i = index">
+            <td>{{i+1}}</td>
+            <td>{{item.reference}}</td>
+            <td>{{item.nom}}</td>
+            <td>{{item.marque}}</td>
+            <td>{{item.quantite}}</td>
+            <td>{{item.price}}</td>
+            <td>{{item.marque_voiture}}</td>
+            <td>
+                <span *ngIf="item.quantite > 0" class="badge bg-success">En Stock</span>
+                <span *ngIf="item.quantite <= 0"class="badge bg-warning">Hors stock</span>
+            </td>            
+            <td>
+              <img  width="100px" height="100px" [src]="'http://127.0.0.1:5000/getimage/'+ item.image " alt="">
+            </td>
+            
+            <td>
+
+                
+                
+                <button type="button" class="btn btn-primary" (click)="getdata(item.reference,item.nom,item.marque,item.quantite,item.price,item.marque_voiture)"    data-bs-toggle="modal" data-bs-target="#exampleModal">update
+                  </button>
+                <button type="button" class="btn btn-primary" (click)="delete(item._id)" >
+                   delete
+                  </button>
+
+                        
+                </td>
+        </tr>
+    </tbody>
+   </table>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modifier produit </h5>
+        
+      </div>
+      <div class="modal-body">
+        <!-- form update start here -->
+        <form #f="ngForm" (ngSubmit)="done(f)">
+          
+              <div class="form-group">
+                  <label for="exampleFormControlInput1">Reference</label>
+                  <input type="text" class="form-control" placeholder="lastname" [(ngModel)]="product.reference" required name="lastname" #reference="ngModel" minlength="2" maxlength="20" ngModel>
+                </div>
+              
+          
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Nom</label>
+                  <input type="text" class="form-control" placeholder="email" [(ngModel)]="product.nom" email required name="nom" #nom="ngModel" ngModel>
+                </div>
+          
+                
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Marque</label>
+                  <input type="text" class="form-control" placeholder="age" [(ngModel)]="product.marque" required name="marque" #marque="ngModel" ngModel>
+                </div>
+                
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Marque voiture</label>
+                  <input type="text" class="form-control" placeholder="marque_voiture" [(ngModel)]="product.marque_voiture"  required name="marque_voiture" #marque_voiture="ngModel" ngModel>
+                </div>
+
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Prix</label>
+                  <input type="number" class="form-control" placeholder="price" [(ngModel)]="product.price" required name="price" #price="ngModel" ngModel>
+                </div>
+                
+
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Quantite</label>
+                  <input type="number" class="form-control" placeholder="quantite" [(ngModel)]="product.quantite" required name="quantite" #quantite="ngModel" ngModel>
+                </div>
+
+             <button class="btn btn-primary"(click)="done(f)"> Modifier le produit </button>
+            </form>
+
+
+
+        <!-- form update end here -->
+      </div>
+     
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+
+  
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+
+
+
+
+
+
+
+
+
+            <div class="modal-body">
+                <form #f="ngForm" (click)="done(product)">
+                      
+                     
+                  
+                  <div class="form-group">
+                    <label for="exampleFormControlInput1">reference</label>
+                    <input type="text" class="form-control" placeholder="reference"  [(ngModel)]="product.reference" required name="firstname" #firstname="ngModel" ngModel minlength="2" maxlength="50">
+                  </div>
+                      <div class="form-group">
+                          <label for="exampleFormControlInput1">marque</label>
+                          <input type="text" class="form-control" placeholder="marque" [(ngModel)]="product.marque" required name="marque" #lastname="ngModel" minlength="2" maxlength="50" ngModel>
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleFormControlInput1">Nom</label>
+                          <input type="text" class="form-control" placeholder="Nom" [(ngModel)]="product.nom" required name="Nom" #lastname="ngModel" minlength="2" maxlength="50" ngModel>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">quantite</label>
+                            <input type="text" class="form-control" placeholder="quantite" [(ngModel)]="product.quantite" required name="lastname" #lastname="ngModel" minlength="2" maxlength="50" ngModel>
+                          </div>
+                          <div class="form-group">
+                            <label for="exampleFormControlInput1">price</label>
+                            <input type="text" class="form-control" placeholder="price" [(ngModel)]="product.price" required name="lastname" #lastname="ngModel" minlength="2" maxlength="20" ngModel>
+                          </div>
+                          <div class="form-group">
+                            <label for="exampleFormControlInput1">marque_voiture</label>
+                            <input type="text" class="form-control" placeholder="marque_voiture" [(ngModel)]="product.marque_voiture" required name="lastname" #lastname="ngModel" minlength="2" maxlength="20" ngModel>
+                          </div>
+                          
+                               
+
+                    </form>
+
+
+
+
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+          <button type="button" class="btn btn-primary" (click)="done(products.id)" > Sauvegarder les modifications</button>
+        </div>
+      </div>
+    </div>
+  </div>  -->

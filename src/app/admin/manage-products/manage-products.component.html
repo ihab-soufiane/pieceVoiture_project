@@ -1,0 +1,32 @@
+<div style="width: 1000px; margin: auto;">
+    <h1 style="text-align: center;" class="mt-2">Products List</h1>
+    <!-- <button class="float-right" mat-raised-button color="warn" style="margin: 10px auto;" type="button" [routerLink]="['/dashbord/AddContact']">
+      <i class="fas fa-plus"></i> Add Contact</button> -->
+      <!-- <input type="search" class="form-control rounded" placeholder="Search Product by Name"  aria-label="Search" aria-describedby="search-addon" > -->
+      <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="on" placeholder="Search Product by Name">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Price</th>
+          <th scope="col">Reference</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let prod of Products | filter:searchText" >
+        <tr>
+          <td>{{prod.nom}}</td>
+          <td>{{prod.quantite}}</td>
+          <td>{{prod.price}}</td>
+          <td>{{prod.reference}}</td>
+          <td>
+            <button class="btn btn-danger" (click)="deleteProduct(prod._id)" >
+              <i class="fas fa-trash-alt"></i> Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  

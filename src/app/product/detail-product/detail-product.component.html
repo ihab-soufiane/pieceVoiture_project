@@ -1,0 +1,40 @@
+
+<div class="text-center" >
+
+          <div class="card" >
+            <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
+              data-mdb-ripple-color="light">
+
+              <img    width="200" height="300" [src]="'http://127.0.0.1:5000/getimage/'+ product.image "/>
+              <a href="#!">
+                <div class="mask">
+                  <div class="d-flex justify-content-start align-items-end h-100 text-center">
+                    <h5>
+                    
+                      <span *ngIf="product.quantite > 0" class="badge bg-success ms-2">En Stock</span>
+                      <span *ngIf="product.quantite <= 0"class="badge bg-warning ms-2">Hors stock</span>
+                    </h5>
+                  </div>
+                </div>
+                <div class="hover-overlay">
+                  <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                </div>
+              </a>
+            </div>
+            <div class="card-body">
+            
+              <a class="mb-2 nom ">
+                <p> {{product.nom}} </p>
+              </a>
+              <a class="text-reset ">
+                <p> {{product.marque_voiture}} </p>
+              </a>
+              <h6 class="mb-3 price">{{product.price}} DT</h6>
+
+            </div>
+
+          </div>
+        </div>
+
+        
+     

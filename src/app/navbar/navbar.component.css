@@ -1,0 +1,22 @@
+.cnx{
+    color:rgb(171, 153, 35);
+}
+.header-block.apparel .header-noscroll .srch_wraper .search-text-box {
+    padding-right: 55px;
+    border: none;
+    border-bottom: 1px solid #c2c2c2;
+    background-color: transparent!important
+}
+.search-text-box {
+    background: #fff;
+    border: 1px solid #c2c2c2;
+    padding-right: 10px;
+    border-radius: 2px
+}
+
+.search-icon {
+    width: 20px;
+    position: absolute;
+    top: 8px;
+    left: 10px
+}

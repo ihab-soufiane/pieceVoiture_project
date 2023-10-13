@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Account</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZEENnEYLd1p4gH4f6MvJX4"
+          crossorigin="anonymous">
+</head>
+<body>
+
+    <div class="container my-4">
+        <div class="row">   
+            <div class="col-md-4">   
+                <div *ngIf="navchange()==='business'">
+                    <img  src="http://cdn.onlinewebfonts.com/svg/img_550783.png" alt="Image description" class="circular-image"/>
+                    <button type="submit" class="btn  bg-warning"  style="font-size: 10px; margin:10px" >Enter your logo </button> 
+                    <!-- <button >Change Content</button> -->
+                </div>
+                <div class="card mb-4">
+                    <ul class="list-group list-group-flush">
+
+                        <div *ngIf="navchange()==='Customer'">
+                            <li class="list-group-item"><a href="#">Order History</a></li>
+                            <li class="list-group-item"><a href="#">Wishlist</a></li>
+                        </div>
+
+                        <div *ngIf="navchange()==='business'"> 
+                            <ul class="list-group">
+                                <li class="list-group-item"><i class="fas fa-user"></i>    Personal details</li>
+                                <li class="list-group-item"><i class="fa fa-building "></i>     Company details</li>
+                                <li class="list-group-item"  ><a routerLink="/vendor"> <i class="fas fa-cogs"></i>Manage products</a></li>
+                                <li class="list-group-item" (click)="changeorder() "(click)="scrollToElement('section1')"><i class="fas fa-shopping-cart"></i> Manage orders</li>
+                                <li class="list-group-item" (click)="changeContent()"><i class="fa fa-map-marker" ></i> Vendor Address</li>
+
+                            </ul>
+                        </div>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-8">
+
+                    <!-- Personal info -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            Personal Account Information
+                        </div>
+                        <div class="card-body">
+                            <form [formGroup]="myForm" (ngSubmit)="updateP()">
+
+                                <div class="form-group">
+                                    <label for="name">FirstName</label>
+                                    <input type="text"formControlName="firstname" class="form-control" id="name" placeholder="Enter First name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">LastName</label>
+                                    <input type="text"formControlName="lastname"  class="form-control" id="name" placeholder="Enter Last name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email address</label>
+                                    <input type="email" formControlName="email"  class="form-control" id="email" placeholder="Enter email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">Password</label>
+                                    <input type="password" formControlName="password" class="form-control" id="name" placeholder="Enter your password">
+                                </div>
+                                <div class="form-group" *ngIf="navchange()==='business'">
+                                    <label for="name">Registration number</label>
+                                    <input type="text"formControlName="matricule"  class="form-control" id="name" placeholder="Enter your registration number">
+                                </div>
+                                <button type="submit" class="btn  bg-warning">Update </button>
+                             </form>
+
+                        </div>
+                    </div>
+
+                    <!-- Company info
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            Comapay Account Information
+                        </div>
+                        <div class="card-body">
+                            <form [formGroup]="myForm" (ngSubmit)="updateP()">
+                                <div class="g" >
+                                <div class="g1">
+                                    <div class="form-group">  
+                                        <label for="name">Company name </label>
+                                        <input type="text"formControlName="companyname" class="form-control" id="name" placeholder="Enter your company name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Phone</label>
+                                        <input type="number"formControlName="lastname"  class="form-control" id="name" placeholder="Enter Phone">
+                                    </div>
+                                </div>
+                                <div class="g2" >
+                                    <div class="form-group">
+                                        <label for="email">Email address</label>
+                                        <input type="email" formControlName="email"  class="form-control" id="email" placeholder="Enter email">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Password</label>
+                                        <input type="password" formControlName="password" class="form-control" id="name" placeholder="Enter your password">
+                                    </div>
+                                </div>
+                               </div>
+                                <div class="form-group" *ngIf="navchange()==='business'">
+                                    <label for="name">Unique identifier </label>
+                                    <input type="text"formControlName="matricule"  class="form-control" id="name" placeholder="Enter your registration number">
+                                </div>
+                                <button type="submit" class="btn  bg-warning">Update </button>
+                             </form>
+
+                        </div>
+                    </div> -->
+               
+
+                        <!-- <div class="card">
+                            <div class="card-header">
+                                Order History
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Order ID</th>
+                                            <th>Date</th>
+                                            <th>Order Total</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div> -->
+                        <!-- <div class="card">
+                            <div class="card-header">
+                            Order History
+                            </div>
+                            <div class="card-body">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Date</th>
+                                    <th>Order Total</th>
+                                    <th>Customer Name</th>
+                                    <th>Customer Email</th>
+                                    <th>Customer Phone</th>
+                                    <th>Shipping Address</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr >
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                
+                                    
+                                
+                                </tr>
+                                </tbody>
+                            </table>
+                            </div>
+                        </div> -->
+
+                      <div class="col-md-12" >
+                        <div class="card mb-4" *ngIf="showContent">
+                          <div class="card-header"  id="section">
+                            Spare Car Parts Inventory
+                          </div>
+                      <div class="card-body">
+                        <table class="table table-striped">
+                          <thead>
+                            <tr>
+                            <th>Car Brand</th>
+                              <th>Part Name</th>
+                              <th>Part Number</th>
+                              <th>Quantity in Stock</th>
+                              <th>Price per Unit</th>
+                              
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                                <td></td>
+                              <td>Spark Plug</td>
+                              <td>123456</td>
+                              <td>50</td>
+                              <td>$2.99</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                              <td>Brake Pad</td>
+                              <td>789012</td>
+                              <td>25</td>
+                              <td>$19.99</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                              <td>Oil Filter</td>
+                              <td>345678</td>
+                              <td>100</td>
+                              <td>$5.99</td>
+                            </tr>
+                              <tr>
+                                <td></td>
+                              <td>Oil Filter</td>
+                              <td>345678</td>
+                              <td>100</td>
+                              <td>$5.99</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="card mb-4"*ngIf="showContent2">
+                      <div class="card-header"  id="section1" >
+                        Orders
+                      </div>
+                      <div class="card-body">
+                        <table class="table table-striped">
+                          <thead>
+                            <tr>
+                              <th>Order ID</th>
+                              <th>Customer Name</th>
+                              <th>Order Date</th>
+                              <th>Order Total</th>
+                              <th>Order Status</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>123</td>
+                              <td>John Doe</td>
+                              <td>2022-05-01</td>
+                              <td>$39.95</td>
+                              <td>Shipped</td>
+                            </tr>
+                            <tr>
+                              <td>456</td>
+                              <td>Jane Smith</td>
+                              <td>2022-04-30</td>
+                              <td>$59.99</td>
+                              <td>Pending</td>
+                            </tr>
+                            <tr>
+                              <td>789</td>
+                              <td>Bob Johnson</td>
+                              <td>2022-04-28</td>
+                              <td>$79.95</td>
+                              <td>Delivered</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+             </div>
+                      
+        </div>
+              

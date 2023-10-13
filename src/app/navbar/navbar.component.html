@@ -1,0 +1,117 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!-- Container wrapper -->
+    <div class="container-fluid">
+      <!-- Toggle button -->
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-mdb-toggle="collapse"
+        data-mdb-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+  
+      <!-- Collapsible wrapper -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <!-- Navbar brand -->
+        <a class="navbar-brand mt-2 mt-lg-0" href="#">
+          <img
+            src="../../assets/auto.png"
+            height="45"
+            alt="auto Logo"
+            loading="lazy"
+          />
+        </a>
+        <!-- Left links -->
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link"  routerLink="">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" *ngIf="navchange() !=='admin'"> Spare parts</a>
+          </li>
+          <li class="nav-item" *ngIf="navchange()==='business'">
+            <a class="nav-link" routerLink="/vendor">Manage procuts</a>
+          </li>
+          <li class="nav-item" *ngIf="navchange()==='admin'" style="display:flex">
+            <a class="nav-link" routerLink="/admin/manageUsers">Manage User</a>
+            <a class="nav-link" routerLink="/admin/manageProducts">Manage prodcuts</a>
+            <!-- <a class="nav-link" routerLink="/admin/manageCommands">Manage commande</a> -->
+          </li>
+          <!-- <li class="nav-item" *ngIf="navchange()==='Customer'">
+            <a class="nav-link"  [routerLink]="['/user', data.user._id]">customer</a>
+          </li> -->
+         
+        </ul>
+        <!-- Left links -->
+      </div>
+      <!-- Collapsible wrapper -->
+      <!-- <input [(ngModel)]="listproducts" type="search" id="srchtxtsticky" name="srchtxtsticky" autocomplete="off" class="srpt editable-content not-editable search-text-box searchBar-border searchBar-bg searchBar-text button form-control-sm " placeholder="Search" value="" fdprocessedid="aeoozf" style="width: 300px;"> -->
+      <!-- Right elements -->
+      <div class="d-flex align-items-center">
+        <!-- Icon -->
+        <a style="padding-left: 20px;" class="text-reset me-3"  
+              routerLink="/card"
+              >
+              <i class="fas fa-shopping-cart"></i>
+        </a>
+
+
+
+        <!-- Avatar -->
+        <div *ngIf="!navchange()">
+          <a
+            class="cnx"
+            routerLink="/signin"
+            id="navbarDropdownMenuAvatar"
+            role="button"
+            data-mdb-toggle="dropdown"
+            aria-expanded="false"
+            
+          >  <i  > se connecter</i>                                 
+        </a>
+         
+        </div>
+        <div *ngIf="navchange()" >
+          <!-- Small button groups (default and split) -->
+            <div class="btn-group">
+              <div class="btn-group dropstart" role="group">
+
+                  <!-- <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-mdb-toggle="dropdown" aria-expanded="false"> -->
+                   <i class="fa-solid fa-user"  type="button" data-mdb-toggle="dropdown" aria-expanded="false"></i> 
+                  <!-- </button> -->
+                  <ul class="dropdown-menu">
+                    <li class="nav-item" *ngIf="navchange()==='business'">
+                      <a class="dropdown-item" [routerLink]="['/user', data.user._id]">Vendor's profile</a>
+                    </li>
+                    <li class="nav-item" *ngIf="navchange()==='admin'" >
+                      <a class="dropdown-item" routerLink="/admin">My dashbord </a>
+                      
+                    </li>
+                    <li class="nav-item" *ngIf="navchange()==='Customer'">
+                      <a  class="dropdown-item"  [routerLink]="['/user', data.user._id]">my profile customer</a>
+                    </li>
+                    <!-- <li><a class="dropdown-item" (click)="logout()">logout</a></li> -->
+                    <a class="dropdown-item" (click)="logout()">
+                      <i class="fas fa-sign-out-alt"></i>
+                      <span class="clearfix d-none d-sm-inline-block">Logout</span>
+                  </a>
+
+                  </ul>
+              </div>
+            </div>
+          
+            <!-- <button (click)="logout()">logout</button> -->
+   
+           
+        </div>
+      </div>
+      <!-- Right elements -->
+    </div>
+    <!-- Container wrapper -->
+  </nav>
+  <!-- Navbar -->
